@@ -11,6 +11,7 @@ import com.example.evgeniy.mymaps.Interfaces.OnCompleteCallBack;
 import com.example.evgeniy.mymaps.Tasks.GetterJSON;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.geometry.BoundingBoxHelper;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.geometry.Polyline;
 import com.yandex.mapkit.map.CameraPosition;
@@ -46,11 +47,6 @@ public class MapsActivity extends AppCompatActivity implements OnCompleteCallBac
 
         btnSetRoute = findViewById(R.id.btnSetRoute);
         btnSetRoute.setOnClickListener(this);
-
-        /*mapView.getMap().move(
-                new CameraPosition(new Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
-                new Animation(Animation.Type.SMOOTH, 0),
-                null);*/
         map = mapView.getMap();
         mapObjects = map.getMapObjects().addCollection();
     }
@@ -70,7 +66,8 @@ public class MapsActivity extends AppCompatActivity implements OnCompleteCallBac
                 Log.e(TAG, "onComplete: ");
             }
             mapObjects.addPolyline(new Polyline(points));
-            map.move(new CameraPosition(points.get(0), 11.0f, 0.0f, 0.0f), new Animation(Animation.Type.SMOOTH, 0), null);
+            CameraPosition c = map.cameraPosition(BoundingBoxHelper.getBounds(new Polyline(points)));
+            map.move(new CameraPosition(c.getTarget(), c.getZoom() - 0.3f, c.getAzimuth(), c.getTilt()));
         } else {
             Toast.makeText(this, "Запрос не выполенен, см Логи", Toast.LENGTH_LONG).show();
         }
