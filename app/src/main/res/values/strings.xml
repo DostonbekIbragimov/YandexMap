@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyMaps</string>
     <string name="Set_route">Задать маршрут</string>
+    <string name="Map">Карта</string>
 </resources>

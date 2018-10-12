@@ -40,8 +40,7 @@ public class GetterJSON extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         String Url = strings[0];
         StringBuilder JSon = new StringBuilder();
-        byte[] data = null;
-        BufferedReader reader = null;
+        BufferedReader reader;
         try {
             URL url = new URL(Url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -71,7 +70,7 @@ public class GetterJSON extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (pgLoading != null)
-            pgLoading.setVisibility(View.GONE);     // To Hide ProgressBar
+            pgLoading.setVisibility(View.GONE);
         if (btn != null)
             btn.setEnabled(true);
         callBack.onComplete(s);

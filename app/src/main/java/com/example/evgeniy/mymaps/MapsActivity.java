@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.evgeniy.mymaps.Interfaces.OnCompleteCallBack;
 import com.example.evgeniy.mymaps.Tasks.GetterJSON;
-import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.BoundingBoxHelper;
 import com.yandex.mapkit.geometry.Point;
@@ -67,7 +66,7 @@ public class MapsActivity extends AppCompatActivity implements OnCompleteCallBac
             }
             mapObjects.addPolyline(new Polyline(points));
             CameraPosition c = map.cameraPosition(BoundingBoxHelper.getBounds(new Polyline(points)));
-            map.move(new CameraPosition(c.getTarget(), c.getZoom() - 0.3f, c.getAzimuth(), c.getTilt()));
+            map.move(new CameraPosition(c.getTarget(), c.getZoom() - 0.05f, c.getAzimuth(), c.getTilt())); // отнять 0,05 от зума нужно для микроскопического отступа, ибо мой внутренний эстет негодует когда всё плотно
         } else {
             Toast.makeText(this, "Запрос не выполенен, см Логи", Toast.LENGTH_LONG).show();
         }
