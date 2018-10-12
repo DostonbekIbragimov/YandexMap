@@ -62,7 +62,7 @@ public class MapsActivity extends AppCompatActivity implements OnCompleteCallBac
                     points.add(new Point(coord.getDouble("la"), coord.getDouble("lo")));
                 }
             } catch (JSONException e) {
-                Log.e(TAG, "onComplete: ");
+                Log.e(TAG, "Ошибка разбора JSON " + e.getMessage());
             }
             mapObjects.addPolyline(new Polyline(points));
             CameraPosition c = map.cameraPosition(BoundingBoxHelper.getBounds(new Polyline(points)));
